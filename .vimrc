@@ -286,6 +286,9 @@ Plug 'vifm/vifm.vim'
 " Vim Color preview for CSS
 Plug 'ap/vim-css-color'
 
+" Auto Pairs brackets
+Plug 'jiangmiao/auto-pairs'
+
 " Initialize plugin system
 call plug#end()
 
