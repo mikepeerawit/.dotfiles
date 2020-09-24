@@ -289,6 +289,9 @@ Plug 'ap/vim-css-color'
 " Auto Pairs brackets
 Plug 'jiangmiao/auto-pairs'
 
+" Ale is use for linting while editing
+Plug 'dense-analysis/ale'
+
 " Initialize plugin system
 call plug#end()
 
