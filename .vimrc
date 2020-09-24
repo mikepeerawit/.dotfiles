@@ -277,8 +277,17 @@ map <leader>pp :setlocal paste!<cr>
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Vifm file manager
-Plug 'vifm/vifm.vim'
+" Nerdtree for file navigation
+Plug 'preservim/nerdtree'
+
+" Tagbar a class outline viewer
+Plug 'preservim/tagbar'
+
+" Command-line fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+" Syntax checking plugin
+Plug 'scrooloose/syntastic'
 
 " AutoComplete for Vim
 Plug 'Valloric/YouCompleteMe'
@@ -296,13 +305,40 @@ Plug 'dense-analysis/ale'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vifm
+" => Nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map Vifm shortcuts
-map <Leader>vv :Vifm<CR>
-map <Leader>vs :VsplitVifm<CR>
-map <Leader>sp :SplitVifm<CR>
-map <Leader>tv :TabVifm<CR>
+map <C-n> :NERDTreeToggle<CR>
+
+" Auto open nerdtree when startup 
+autocmd vimenter * NERDTree
+
+" Auto open nerdtree when startup with no files specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Nerdtree show hidden files
+let NERDTreeShowHidden=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-m> :TagbarToggle<CR>
+
+" Tagbar detect exuberant-ctags
+let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
