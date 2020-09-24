@@ -277,11 +277,11 @@ map <leader>pp :setlocal paste!<cr>
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Lightline statusbar 
-Plug 'itchyny/lightline.vim'
-
 " Vifm file manager
 Plug 'vifm/vifm.vim'
+
+" AutoComplete for Vim
+Plug 'Valloric/YouCompleteMe'
 
 " Vim Color preview for CSS
 Plug 'ap/vim-css-color'
