@@ -291,7 +291,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/syntastic'
 
 " AutoComplete for Vim
-Plug 'Valloric/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 
 " Vim Color preview for CSS
 Plug 'ap/vim-css-color'
