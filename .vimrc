@@ -23,6 +23,9 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+" Shortcut to compile java file
+set makeprg=javac
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,7 +294,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/syntastic'
 
 " AutoComplete for Vim
-Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Vim Color preview for CSS
 Plug 'ap/vim-css-color'
@@ -320,6 +323,27 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Nerdtree show hidden files
 let NERDTreeShowHidden=1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => CoC 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:check_back_space() abort
+    let col = col(',') - 1
+    return !col || getline(',')[col - 1] =~# '\s'
+endfunction
+
+inoremap <buffer> <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <buffer> <silent><expr> <C-space> coc#refresh()
+
+" GoTo code navigation
+nmap <buffer> <leader>gd <Plug>(coc-definition)
+nmap <buffer> <leader>gy <Plug>(coc-type-definition)
+nmap <buffer> <leader>gi <Plug>(coc-implementation)
+nmap <buffer> <leader>gr <Plug>(coc-references)
+nnoremap <buffer> <leader>cr :CocRestart
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
