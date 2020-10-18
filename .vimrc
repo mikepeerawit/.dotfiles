@@ -14,7 +14,7 @@ au FocusGained,BufEnter * checktime
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
+let mapleader = " "
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -282,6 +282,9 @@ call plug#begin('~/.vim/plugged')
 
 " Nerdtree for file navigation
 Plug 'preservim/nerdtree'
+
+" Vim plygin for Git
+Plug 'tpope/vim-fugitive'
 
 " Tagbar a class outline viewer
 Plug 'preservim/tagbar'
