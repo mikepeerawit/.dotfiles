@@ -283,7 +283,7 @@ call plug#begin('~/.vim/plugged')
 " Nerdtree for file navigation
 Plug 'preservim/nerdtree'
 
-" Vim plygin for Git
+" Vim plugin for Git
 Plug 'tpope/vim-fugitive'
 
 " Tagbar a class outline viewer
@@ -347,7 +347,8 @@ nmap <buffer> <leader>gy <Plug>(coc-type-definition)
 nmap <buffer> <leader>gi <Plug>(coc-implementation)
 nmap <buffer> <leader>gr <Plug>(coc-references)
 nnoremap <buffer> <leader>cr :CocRestart
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fzf_action = {
