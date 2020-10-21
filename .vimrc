@@ -1,6 +1,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Override default behavior
+set nocompatible
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -294,16 +297,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Syntax checking plugin
-Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
 
 " AutoComplete for Vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Vim Color preview for CSS
 Plug 'ap/vim-css-color'
-
-" Auto Pairs brackets
-Plug 'jiangmiao/auto-pairs'
 
 " Ale is use for linting while editing
 Plug 'dense-analysis/ale'
@@ -339,7 +339,18 @@ inoremap <buffer> <silent><expr> <TAB>
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
 inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <buffer> <silent><expr> <C-space> coc#refresh()
+inoremap <buffer> <silent><expr> <leader>c coc#refresh()
+
+let g:coc_global_extensions = [
+ \ 'coc-marketplace',
+ \ 'coc-tsserver',
+ \ 'coc-json',
+ \ 'coc-java',
+ \ 'coc-python',
+ \ 'coc-pairs',
+ \ 'coc-html',
+ \ 'coc-css',
+ \ ]
 
 " GoTo code navigation
 nmap <buffer> <leader>gd <Plug>(coc-definition)
@@ -347,6 +358,9 @@ nmap <buffer> <leader>gy <Plug>(coc-type-definition)
 nmap <buffer> <leader>gi <Plug>(coc-implementation)
 nmap <buffer> <leader>gr <Plug>(coc-references)
 nnoremap <buffer> <leader>cr :CocRestart
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fzf
@@ -371,19 +385,6 @@ map <C-m> :TagbarToggle<CR>
 
 " Tagbar detect exuberant-ctags
 let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
