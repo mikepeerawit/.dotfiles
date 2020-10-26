@@ -349,6 +349,8 @@ let g:coc_global_extensions = [
  \ 'coc-pairs',
  \ 'coc-html',
  \ 'coc-css',
+ \ 'coc-emmet',
+ \ 'coc-eslint',
  \ ]
 
 " GoTo code navigation
