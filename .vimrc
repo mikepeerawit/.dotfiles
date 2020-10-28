@@ -154,18 +154,32 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
-
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
+" open new split panes to right and below
+set splitright
+set splitbelow
+
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+
+" open terminal on ctrl+n
+function! OpenTerminal()
+  terminal  
+  resize 10
+endfunction
+nnoremap <C-T> :call OpenTerminal()<CR>
+
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -301,11 +315,8 @@ Plug 'sheerun/vim-polyglot'
 " AutoComplete for Vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Vim Color preview for CSS
-Plug 'ap/vim-css-color'
-
-" Ale is use for linting while editing
-Plug 'dense-analysis/ale'
+" Emmet plugin for Vim
+Plug 'mattn/emmet-vim'
 
 " Initialize plugin system
 call plug#end()
@@ -313,17 +324,14 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
-
-" Auto open nerdtree when startup 
-autocmd vimenter * NERDTree
-
-" Auto open nerdtree when startup with no files specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Nerdtree show hidden files
-let NERDTreeShowHidden=1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Toggle
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CoC 
@@ -337,8 +345,6 @@ inoremap <buffer> <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
-inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <buffer> <silent><expr> <leader>c coc#refresh()
 
 let g:coc_global_extensions = [
  \ 'coc-marketplace',
@@ -351,6 +357,7 @@ let g:coc_global_extensions = [
  \ 'coc-css',
  \ 'coc-emmet',
  \ 'coc-eslint',
+ \ 'coc-prettier',
  \ ]
 
 " GoTo code navigation
@@ -366,23 +373,18 @@ nmap <leader>rn <Plug>(coc-rename)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
-let g:fzf_preview_window = 'right:60%'
-nnoremap <c-p> :Files<cr>
-augroup fzf
-  autocmd!
-  autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-augroup END
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \}
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-m> :TagbarToggle<CR>
+nnoremap <C-m> :TagbarToggle<CR>
 
 " Tagbar detect exuberant-ctags
 let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
