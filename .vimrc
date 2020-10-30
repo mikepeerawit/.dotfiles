@@ -318,6 +318,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Emmet plugin for Vim
 Plug 'mattn/emmet-vim'
 
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
 " Initialize plugin system
 call plug#end()
 
@@ -341,10 +344,16 @@ function! s:check_back_space() abort
     return !col || getline(',')[col - 1] =~# '\s'
 endfunction
 
-inoremap <buffer> <silent><expr> <TAB>
+inoremap <silent><expr> <Tab>
             \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
+            \ <SID>check_back_space() ? "\<Tab>" :
             \ coc#refresh()
+
+" <S-Tab>: completion back
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+
+" <CR>: confirm completion, or insert <CR>
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 let g:coc_global_extensions = [
  \ 'coc-marketplace',
@@ -357,7 +366,6 @@ let g:coc_global_extensions = [
  \ 'coc-css',
  \ 'coc-emmet',
  \ 'coc-eslint',
- \ 'coc-prettier',
  \ ]
 
 " GoTo code navigation
