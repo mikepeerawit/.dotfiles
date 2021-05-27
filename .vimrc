@@ -299,27 +299,11 @@ call plug#begin('~/.vim/plugged')
 " Nerdtree for file navigation
 Plug 'preservim/nerdtree'
 
-" Vim plugin for Git
-Plug 'tpope/vim-fugitive'
-
-" Tagbar a class outline viewer
-Plug 'preservim/tagbar'
-
-" Command-line fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Syntax checking plugin
-Plug 'sheerun/vim-polyglot'
-
 " AutoComplete for Vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Emmet plugin for Vim
-Plug 'mattn/emmet-vim'
-
-" post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" ctrlp a fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -356,16 +340,16 @@ inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 let g:coc_global_extensions = [
- \ 'coc-marketplace',
  \ 'coc-tsserver',
  \ 'coc-json',
- \ 'coc-java',
  \ 'coc-python',
  \ 'coc-pairs',
  \ 'coc-html',
  \ 'coc-css',
- \ 'coc-emmet',
+ \ 'coc-snippets',
  \ 'coc-eslint',
+ \ 'coc-prettier',
+ \ 'coc-clangd'
  \ ]
 
 " GoTo code navigation
@@ -378,24 +362,15 @@ nnoremap <buffer> <leader>cr :CocRestart
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+" => CtrlP 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Tagbar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-m> :TagbarToggle<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
-" Tagbar detect exuberant-ctags
-let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+" Ignore git ignored files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
