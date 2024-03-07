@@ -6,4 +6,5 @@ The main things here are:
 
   1. My vim configuration.
   2. My zsh configuration.
-  3. My vifm configuration.
+  3. My tmux configuration.
+  4. Setup script.
