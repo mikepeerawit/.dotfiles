@@ -1,11 +1,12 @@
 # .dotfiles
 
-This is my dotfiles, I primarily use MacOS as my main os and have collecting my configurations files. In the future I might try getting into learning Linux. For now, I have tried severals distro such as, ubuntu, pop os, elementary os and linux mint. However, I am looking forward to lurk into the world of Arch linux and configure the system to my workflow.
+Welcome to my personal collection of dotfiles. As a macOS user, I've curated various configuration files to streamline and enhance my development workflow. My explorations into Linux have been broad, dabbling with distributions such as Ubuntu, Pop!_OS, Elementary OS, and Linux Mint, each contributing to my understanding and preferences in setting up my environment.
 
-The main things here are:
+This repository houses my configurations for:
 
-  1. My vim configuration.
-  2. My zsh configuration.
-  3. My tmux configuration.
-  4. My coc configuration
-  5. Setup script.
+Vim: Tailored settings for my preferred editor, optimizing my coding experience.
+Zsh: Customizations for the Z shell that enhance my terminal usability.
+Tmux: Configuration for managing multiple terminal sessions effortlessly.
+Coc: Conquer of Completion settings for a rich coding experience in Vim.
+Setup Script: A convenient script to automate the setup of these tools on a new machine.
+Feel free to use and adapt these configurations to fit your own development needs. Enjoy crafting your ideal environment!
