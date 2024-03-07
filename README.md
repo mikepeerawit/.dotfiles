@@ -9,4 +9,5 @@ Zsh: Customizations for the Z shell that enhance my terminal usability.
 Tmux: Configuration for managing multiple terminal sessions effortlessly.
 Coc: Conquer of Completion settings for a rich coding experience in Vim.
 Setup Script: A convenient script to automate the setup of these tools on a new machine.
+
 Feel free to use and adapt these configurations to fit your own development needs. Enjoy crafting your ideal environment!
