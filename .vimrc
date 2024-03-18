@@ -6,7 +6,7 @@ Plug 'junegunn/vim-easy-align'
 
  " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -19,9 +19,8 @@ call plug#end()
 
 syntax on
 
-let g:dracula_colorterm = 0
-let g:dracula_italic = 0
-colorscheme dracula
+colorscheme catppuccin_mocha
+set termguicolors
 set cursorline
 set hlsearch
 set backspace=2
@@ -64,7 +63,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 let g:Powerline_symbols = 'fancy'
-let g:airline_theme='dracula'
+let g:airline_theme ='catppuccin_mocha'
 let g:airline_powerline_fonts = 1
 
 " CoC Config
